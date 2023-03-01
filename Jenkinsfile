@@ -17,7 +17,7 @@ pipeline{
             }
         }
         stage("deploy-dev"){
-            step{
+            steps{
                 sshagent(['azure-jenkins-agent']) {
                     sh """
                         scp -o StrictHostKeyChecking=no target/myweb.war ec2-13.127.148.236:/opt/tomcat-10/webapps
