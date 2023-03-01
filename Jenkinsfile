@@ -20,12 +20,12 @@ pipeline{
             steps{
                 sshagent(['azure-jenkins-agent']) {
                     sh """
-                        scp -o StrictHostKeyChecking=no target/myweb.war ec2-13.127.148.236:/opt/tomcat-10/webapps
+                        scp -o StrictHostKeyChecking=no target/myweb.war ec2@13.127.148.236:/opt/tomcat-10/webapps
                     
                     
-                        ssh ec2-13.127.148.236 /opt/tomcat-10/bin/shutdown.sh
+                        ssh ec2@13.127.148.236 /opt/tomcat-10/bin/shutdown.sh
                     
-                        ssh ec2-13.127.148.236 /opt/tomcat-10/bin/startup.sh
+                        ssh ec2@13.127.148.236 /opt/tomcat-10/bin/startup.sh
                
                
                     """
