@@ -13,8 +13,22 @@ pipeline{
         stage("Maven Build"){
             steps{
                 sh "mvn clean package"
+                sh "mv target/*.war target/myweb.war"
             }
-        
+        }
+        stage("deploy-dev"){
+            sshagent(['azure-jenkins-agent']) {
+               sh """
+                    scp -o StrictHostKeyChecking=no target/myweb.war ec2-13.127.148.236:/opt/tomcat-10/webapps
+                    
+                    
+                    ssh ec2-13.127.148.236 /opt/tomcat-10/bin/shutdown.sh
+                    
+                    ssh ec2-13.127.148.236 /opt/tomcat-10/bin/startup.sh
+               
+               
+               """
+            }
         }
     }
 }
