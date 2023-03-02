@@ -17,18 +17,15 @@ pipeline{
             }
         }
         stage("deploy-dev"){
-            steps{
                 sshagent(['azure-jenkins-agent']) {
                     sh """
-                        scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.9.7: /opt/tomcat8/webapps/
+                        scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.9.7:/opt/tomcat8/webapps/
                     
                         ssh ec2-user@172.31.9.7 /opt/tomcat8/bin/shutdown.sh
                     
                         ssh ec2-user@172.31.9.7 /opt/tomcat8/bin/startup.sh
                
                     """
-            }
-
             }
         }
     }
