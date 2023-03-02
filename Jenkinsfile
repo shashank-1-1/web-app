@@ -9,4 +9,11 @@ pipeline{
                 git 'https://github.com/shashank-1-1/web-app.git'
             }
         }
-    }
+        stage("Maven Build"){
+            steps{
+                sh "mvn clean package"
+               // sh "mv target/*.war target/myweb.war"
+            }
+        }
+    
+    
