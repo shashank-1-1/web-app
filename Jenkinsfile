@@ -18,7 +18,7 @@ pipeline{
         }
         stage("deploy-dev"){
                 sshagent(['azure-jenkins-agent']) {
-	                sh "mv target/myweb*.war target/myweb.war"
+	                sh "mv target/myweb*.war target/myweb11.war"
 		
 		                    sh "scp -o StrictHostKeyChecking=no target/myweb.war ec2-user@172.31.9.7:/opt/tomcat8/webapps/"
 		
