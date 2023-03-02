@@ -17,7 +17,8 @@ pipeline{
             }
         }
         stage("deploy-dev"){
-                sshagent(['azure-jenkins-agent']) {
+            steps{
+                sshagent(['github-private-key']) {
                     sh """
                         scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.9.7:/opt/tomcat8/webapps/
                     
@@ -29,4 +30,5 @@ pipeline{
             }
         }
     }
+}
 }
